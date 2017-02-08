@@ -15,20 +15,17 @@ public class Ouvrage {
     private GregorianCalendar dateP;
     private String target;
     private int lastNumExemplaire;
-    private HashMap<Integer,exemplaire> exemplaires;
+    private HashMap<Integer, Exemplaire> exemplaires;
 
     public Ouvrage(String ISBN, String titre) {
         this.ISBN = ISBN;
         this.titre = titre;
-    }
-
-    public void setInfo (ArrayList<String> auteurs, GregorianCalendar dateP, String target){
-        if(!auteurs.isEmpty())
-            this.auteurs = auteurs;
-        if (dateP != null)
-            this.dateP = dateP;
-        if (!target.isEmpty())
-            this.target = target;
+        this.exemplaires = new HashMap<>();
+        this.lastNumExemplaire = 0;
+        this.auteurs = null;
+        this.editeur = null;
+        this.dateP = null;
+        this.target = null;
     }
 
     public Ouvrage(String ISBN, String titre, ArrayList<String> auteurs, String editeur, GregorianCalendar dateP, String target) {
@@ -40,57 +37,54 @@ public class Ouvrage {
         this.target = target;
     }
 
-    public void setOuvrage(String ISBN) {
-        this.ISBN = ISBN;
+    public void setInfo (){
+
+        ArrayList<String> auteurs = new ArrayList<>();
+        String auteur;
+        EntreesSorties.afficherMessage("Veuillez lister les auteurs (0 pour finir la list) : ");
+        do {
+            auteur = EntreesSorties.lireChaine();
+        }while (!auteur.matches("^0$"));
+        if(!auteurs.isEmpty())
+            this.auteurs = auteurs;
+        this.dateP  = EntreesSorties.lireDate("Veuillez saisir la date de parutionde l'ouvrage : ");
+        this.target = EntreesSorties.lireChaine("Veuillez saisir le public de l'ouvrage : ");
+        this.editeur = EntreesSorties.lireChaine("Veuillez saisir le nom de l'éditeur : ");
+
     }
 
-    public String afficher() {
-        return "Ouvrage{" +
-                "ISBN='" + ISBN + '\'' +
-                ", titre='" + titre + '\'' +
-                ", auteurs=" + auteurs +
-                ", editeur='" + editeur + '\'' +
-                ", dateP=" + dateP +
-                ", target='" + target + '\'' +
-                '}';
+    public void afficherOuvrage() {
+        EntreesSorties.afficherTitre("Titre : "+titre);
+        EntreesSorties.afficherMessage("ISBN : "+ISBN);
+        if (auteurs!=null)
+            EntreesSorties.afficherMessage("Auteurs : "+auteurs);
+        EntreesSorties.afficherMessage("test1");
+        if (editeur!=null)
+            EntreesSorties.afficherMessage("Editeur : "+editeur);
+        EntreesSorties.afficherMessage("test2");
+        if (dateP!=null)
+            EntreesSorties.afficherMessage("Date de parution : "+EntreesSorties.ecrireDate(dateP));
+        EntreesSorties.afficherMessage("test3");
+        if (target!=null)
+            EntreesSorties.afficherMessage("Public : "+target);
+        EntreesSorties.afficherMessage("Exemplaire : "+lastNumExemplaire);
     }
 
-    public void newExemplaire(String ISBN){
+    public void newExemplaire(){
         lastNumExemplaire++;
-        exemplaire e = new exemplaire(ISBN,lastNumExemplaire);
+        Exemplaire e = new Exemplaire(this.ISBN,lastNumExemplaire);
         exemplaires.put(lastNumExemplaire,e);
     }
 
-    public String getISBN() {
-        return ISBN;
+    public void listerExemplaires() {
+        if (exemplaires.isEmpty())
+            EntreesSorties.afficherMessage("Il n'y a pas d'ouvrage enregistré");
+        else {
+            for(int num: exemplaires.keySet()){
+                exemplaires.get(num).afficherExemplaire();
+            }
+        }
     }
 
-    public String getTitre() {
-        return titre;
-    }
-
-    public ArrayList<String> getAuteurs() {
-        return auteurs;
-    }
-
-    public String getEditeur() {
-        return editeur;
-    }
-
-    public GregorianCalendar getDateP() {
-        return dateP;
-    }
-
-    public String getTarget() {
-        return target;
-    }
-
-    public int getLastNumExemplaire() {
-        return lastNumExemplaire;
-    }
-
-    public HashMap<Integer, exemplaire> getExemplaires() {
-        return exemplaires;
-    }
 
 }

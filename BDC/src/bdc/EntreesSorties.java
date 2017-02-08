@@ -75,7 +75,7 @@ public class EntreesSorties  {
 	
 	/**
 	 * Affichage d'un texte explicatif avant demande d'une saisie.
-	 * @param message le texte à afficher
+	 * @param libelle le texte à afficher
 	 */
 	private static void afficherLibelle(String libelle) {
 		System.out.print(libelle);		

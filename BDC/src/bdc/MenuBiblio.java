@@ -1,10 +1,13 @@
 package bdc;
 
 
+import java.util.ArrayList;
+import java.util.GregorianCalendar;
+
 public class MenuBiblio {
-	private Bibliotheque _bibliotheque;
+	private Biblio _bibliotheque;
 	
-	public MenuBiblio (Bibliotheque bibliotheque) {
+	public MenuBiblio (Biblio bibliotheque) {
 	_bibliotheque = bibliotheque;
 	}
 	
@@ -19,6 +22,7 @@ public void menuPrincipal() {
 		EntreesSorties.afficherMessage("|                   Menu Principal                       |");
 		EntreesSorties.afficherMessage("| Saisissez un numero correspondant :                    |");
 		EntreesSorties.afficherMessage("| Menu Lecteur : 1                                       |");
+		EntreesSorties.afficherMessage("| Menu ouvrage : 2                                       |");
 		EntreesSorties.afficherMessage("| Quitter : 0                                            |");
 		EntreesSorties.afficherMessage(" ========================================================");
 		menu = EntreesSorties.lireEntier();
@@ -26,6 +30,10 @@ public void menuPrincipal() {
 			switch (menu){
 				case 1 : {
 					this.menuLecteur();
+					break;
+				}
+				case 2 : {
+					this.menuOuvrage();
 					break;
 				}
 				
@@ -48,17 +56,28 @@ public void menuLecteur() {
 		EntreesSorties.afficherMessage("| Saisissez un numero correspondant :                    |");
 		EntreesSorties.afficherMessage("| Nouveau Lecteur : 1                                    |");
 		EntreesSorties.afficherMessage("| Consulter Lecteur : 2                                  |");
+		EntreesSorties.afficherMessage("| modifier Lecteur : 3                                   |");
+		EntreesSorties.afficherMessage("| Lister Lecteur : 4                                     |");
 		EntreesSorties.afficherMessage("| Retour Menu Principal : 0                              |");
 		EntreesSorties.afficherMessage(" ========================================================");
 		menuLect = EntreesSorties.lireEntier();
 			
 			switch (menuLect){
 				case 1 : {
-					_bibliotheque.nouveauLecteur();
+					_bibliotheque.newLecteur();
 					break;
 				}
 				case 2 : {
-					_bibliotheque.consulterLecteur();
+					_bibliotheque.getLecteur().afficherLecteur();
+					break;
+				}
+				case 3 : {
+					_bibliotheque.getLecteur().setLecteur();
+
+					break;
+				}
+				case 4 : {
+					_bibliotheque.listerLecteurs();
 					break;
 				}
 				default : {
@@ -68,6 +87,51 @@ public void menuLecteur() {
 	} while (menuLect != 0);	
 }
 
-	
+
+public void menuOuvrage() {
+		Integer menuOuvr;
+		do {
+			EntreesSorties.afficherMessage(" ========================================================");
+			EntreesSorties.afficherMessage("| Saisissez un numero correspondant :                    |");
+			EntreesSorties.afficherMessage("| Nouvel ouvrage : 1                                     |");
+			EntreesSorties.afficherMessage("| Consulter ouvrage: 2                                   |");
+			EntreesSorties.afficherMessage("| Modifier ouvrage: 3                                    |");
+			EntreesSorties.afficherMessage("| Lister ouvrages: 4                                     |");
+			EntreesSorties.afficherMessage("| Nouvel Exemplaire: 5                                   |");
+			EntreesSorties.afficherMessage("| Lister exemplaires: 6                                  |");
+			EntreesSorties.afficherMessage("| Retour Menu Principal : 0                              |");
+			EntreesSorties.afficherMessage(" ========================================================");
+			menuOuvr = EntreesSorties.lireEntier();
+
+			switch (menuOuvr){
+				case 1 : {
+					_bibliotheque.newOuvrage();
+					break;
+				}
+				case 2 : {
+					_bibliotheque.getOuvrage().afficherOuvrage();
+					break;
+				}
+				case 3 : {
+					_bibliotheque.getOuvrage().setInfo();
+					break;
+				}
+				case 4 : {
+					_bibliotheque.listerOuvrage();
+					break;
+				}
+				case 5 : {
+					_bibliotheque.getOuvrage().newExemplaire();
+					break;
+				}
+				case 6 : {
+					_bibliotheque.getOuvrage().listerExemplaires();
+				}
+				default : {
+					break;
+				}
+			}
+		} while (menuOuvr != 0);
+	}
 }
 

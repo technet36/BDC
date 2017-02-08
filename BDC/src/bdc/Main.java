@@ -10,7 +10,7 @@ public class Main {
 	
 	public Main() {
 
-		Bibliotheque bibliotheque = new Bibliotheque();
+		Biblio bibliotheque = new Biblio();
 		
 		String nomFich="save.ser";
 		
@@ -22,7 +22,7 @@ public class Main {
 			FileInputStream fichier = new FileInputStream(nomFich);
 			ObjectInputStream in = new ObjectInputStream(fichier);
 
-			bibliotheque = (Bibliotheque) in.readObject();
+			bibliotheque = (Biblio) in.readObject();
 			
 			fichier.close();
 			in.close();
