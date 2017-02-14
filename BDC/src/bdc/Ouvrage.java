@@ -59,13 +59,10 @@ public class Ouvrage implements Serializable{
         EntreesSorties.afficherMessage("ISBN : "+ISBN);
         if (auteurs!=null)
             EntreesSorties.afficherMessage("Auteurs : "+auteurs);
-        EntreesSorties.afficherMessage("test1");
         if (editeur!=null)
             EntreesSorties.afficherMessage("Editeur : "+editeur);
-        EntreesSorties.afficherMessage("test2");
         if (dateP!=null)
             EntreesSorties.afficherMessage("Date de parution : "+EntreesSorties.ecrireDate(dateP));
-        EntreesSorties.afficherMessage("test3");
         if (target!=null)
             EntreesSorties.afficherMessage("Public : "+target);
         EntreesSorties.afficherMessage("Exemplaire : "+lastNumExemplaire);
