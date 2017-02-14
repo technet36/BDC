@@ -1,4 +1,5 @@
 package bdc;
+import java.io.Serializable;
 import java.util.GregorianCalendar;
 
 /*
@@ -11,7 +12,7 @@ import java.util.GregorianCalendar;
  *
  * @author anthony
  */
-public class Lecteur {
+public class Lecteur implements Serializable {
 
 	private String nom;
 	private String prenom;

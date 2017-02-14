@@ -1,5 +1,6 @@
 package bdc;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
@@ -7,7 +8,7 @@ import java.util.HashMap;
 /**
  * Created by moran on 07/02/2017.
  */
-public class Ouvrage {
+public class Ouvrage implements Serializable{
     private String ISBN;
     private String titre;
     private ArrayList<String> auteurs;

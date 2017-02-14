@@ -1,9 +1,11 @@
 package bdc;
 
+import java.io.Serializable;
+
 /**
  * Created by moran on 07/02/2017.
  */
-public class Exemplaire {
+public class Exemplaire implements Serializable {
     private String ISBN;
     private int num;
 
