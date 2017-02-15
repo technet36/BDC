@@ -70,7 +70,9 @@ public class Ouvrage implements Serializable{
 
     public void newExemplaire(){
         lastNumExemplaire++;
-        Exemplaire e = new Exemplaire(this.ISBN,lastNumExemplaire);
+        boolean isEmpruntable = EntreesSorties.lireChaine("Cet exemplaire est-il empruntable (Y/n)").equalsIgnoreCase("y");
+
+        Exemplaire e = new Exemplaire(this, isEmpruntable,lastNumExemplaire);
         exemplaires.put(lastNumExemplaire,e);
     }
 
@@ -83,6 +85,11 @@ public class Ouvrage implements Serializable{
                 exemplaires.get(num).afficherExemplaire();
             }
         }
+    }
+
+    public void setExemplaires(){
+        int num = EntreesSorties.lireEntier("Pour quel exemplaire voulez-vous changer son empruntabilité (num): ");
+        exemplaires.get(num).toggleEmpruntability();
     }
 
 

@@ -94,11 +94,12 @@ public void menuOuvrage() {
 			EntreesSorties.afficherMessage(" ========================================================");
 			EntreesSorties.afficherMessage("| Saisissez un numero correspondant :                    |");
 			EntreesSorties.afficherMessage("| Nouvel ouvrage : 1                                     |");
-			EntreesSorties.afficherMessage("| Consulter ouvrage: 2                                   |");
+			EntreesSorties.afficherMessage("| Choisir ouvrage: 2                                   |");
 			EntreesSorties.afficherMessage("| Modifier ouvrage: 3                                    |");
 			EntreesSorties.afficherMessage("| Lister ouvrages: 4                                     |");
-			EntreesSorties.afficherMessage("| Nouvel Exemplaire: 5                                   |");
-			EntreesSorties.afficherMessage("| Lister exemplaires: 6                                  |");
+			EntreesSorties.afficherMessage("| Nouvel exemplaire: 5                                   |");
+			EntreesSorties.afficherMessage("| modifier exemplaire: 6                                 |");
+			EntreesSorties.afficherMessage("| Lister exemplaires: 7                                  |");
 			EntreesSorties.afficherMessage("| Retour Menu Principal : 0                              |");
 			EntreesSorties.afficherMessage(" ========================================================");
 			menuOuvr = EntreesSorties.lireEntier();
@@ -125,6 +126,51 @@ public void menuOuvrage() {
 					break;
 				}
 				case 6 : {
+					_bibliotheque.getOuvrage().setExemplaires();
+					break;
+				}
+				case 7 : {
+					_bibliotheque.getOuvrage().listerExemplaires();
+				}
+				default : {
+					break;
+				}
+			}
+		} while (menuOuvr != 0);
+	}
+
+	public void menuLivre(String ISBN){
+		Integer menuLivre;
+		do {
+			EntreesSorties.afficherMessage(" ========================================================");
+			EntreesSorties.afficherMessage("| Saisissez un numero correspondant :                    |");
+			EntreesSorties.afficherMessage("| Modifier ouvrage: 3                                    |");
+			EntreesSorties.afficherMessage("| Lister ouvrages: 4                                     |");
+			EntreesSorties.afficherMessage("| Nouvel exemplaire: 5                                   |");
+			EntreesSorties.afficherMessage("| modifier exemplaire: 6                                 |");
+			EntreesSorties.afficherMessage("| Lister exemplaires: 7                                  |");
+			EntreesSorties.afficherMessage("| Retour Menu Principal : 0                              |");
+			EntreesSorties.afficherMessage(" ========================================================");
+			menuLivre = EntreesSorties.lireEntier();
+
+			switch (menuLivre){
+				case 3 : {
+					_bibliotheque.getOuvrage().setInfo();
+					break;
+				}
+				case 4 : {
+					_bibliotheque.listerOuvrage();
+					break;
+				}
+				case 5 : {
+					_bibliotheque.getOuvrage().newExemplaire();
+					break;
+				}
+				case 6 : {
+					_bibliotheque.getOuvrage().setExemplaires();
+					break;
+				}
+				case 7 : {
 					_bibliotheque.getOuvrage().listerExemplaires();
 				}
 				default : {
