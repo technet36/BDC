@@ -75,6 +75,7 @@ public class Ouvrage implements Serializable{
     }
 
     public void listerExemplaires() {
+        EntreesSorties.afficherTitre("Liste des exemplaires de : "+this.titre);
         if (exemplaires.isEmpty())
             EntreesSorties.afficherMessage("Il n'y a pas d'ouvrage enregistré");
         else {
