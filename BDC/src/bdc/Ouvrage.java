@@ -1,5 +1,7 @@
 package bdc;
 
+import UI.EntreesSorties;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
@@ -29,6 +31,15 @@ public class Ouvrage implements Serializable{
         this.target = null;
     }
 
+    /**
+     * Constructeur complet de la class ouvrage
+     * @param ISBN : n° ISBN de l'ouvrage à créer (String)
+     * @param titre : titre de l'ouvrage à créer (String)
+     * @param auteurs : ArrayList<String> des auteurs
+     * @param editeur : éditeur de l'ouvrage (string)
+     * @param dateP : date de parution de l'ouvrage (GregorianCalendar)
+     * @param target : public ciblé par l'ouvrage (String)
+     */
     public Ouvrage(String ISBN, String titre, ArrayList<String> auteurs, String editeur, GregorianCalendar dateP, String target) {
         this.ISBN = ISBN;
         this.titre = titre;
@@ -38,6 +49,19 @@ public class Ouvrage implements Serializable{
         this.target = target;
     }
 
+    /**
+     * Permet de modifier les attributs d'un ouvrage
+     * @param auteurs : l'auteur de l'ouvrage (ArrayList)
+     * @param editeur : éditeur de l'ouvrage
+     * @param dateP : date de parution de l'ouvrage (GregorianCalendar)
+     * @param target : public ciblé par l'ouvrage
+     */
+    public void setInfo (ArrayList<String> auteurs, String editeur, GregorianCalendar dateP, String target) {
+        this.auteurs = auteurs;
+        this.editeur = editeur;
+        this.dateP = dateP;
+        this.target = target;
+    }
     public void setInfo (){
 
         ArrayList<String> auteurs = new ArrayList<>();
@@ -68,6 +92,15 @@ public class Ouvrage implements Serializable{
         EntreesSorties.afficherMessage("Exemplaire : "+lastNumExemplaire);
     }
 
+    /**
+     * Crée un nouvel exemplaire
+     * @param isEmpruntable : isEmpruntable état du livre (boolean)
+     */
+    public void newExemplaire (boolean isEmpruntable){
+        lastNumExemplaire++;
+        Exemplaire e = new Exemplaire(this, isEmpruntable,lastNumExemplaire);
+        exemplaires.put(lastNumExemplaire,e);
+    }
     public void newExemplaire(){
         lastNumExemplaire++;
         boolean isEmpruntable = EntreesSorties.lireChaine("Cet exemplaire est-il empruntable (Y/n)").equalsIgnoreCase("y");
@@ -87,10 +120,39 @@ public class Ouvrage implements Serializable{
         }
     }
 
+    /**
+     * Change l'état de boolean empruntable de l'exemplaire
+     * @param numExememplaire : n° de l'exemplaire
+     */
+    public void setExemplaires(int numExememplaire) {
+        exemplaires.get(numExememplaire).toggleEmpruntability();
+    }
     public void setExemplaires(){
         int num = EntreesSorties.lireEntier("Pour quel exemplaire voulez-vous changer son empruntabilité (num): ");
         exemplaires.get(num).toggleEmpruntability();
     }
 
+    public String getISBN() {
+        return ISBN;
+    }
 
+    public String getTitre() {
+        return titre;
+    }
+
+    public String getEditeur() {
+        return editeur;
+    }
+
+    public GregorianCalendar getDateP() {
+        return dateP;
+    }
+
+    public String getTarget() {
+        return target;
+    }
+
+    public int getNbExemplaires() {
+        return exemplaires.size();
+    }
 }

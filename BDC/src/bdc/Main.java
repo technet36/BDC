@@ -1,5 +1,9 @@
 package bdc;
 
+import UI.EntreesSorties;
+import UI.Fenetre;
+import UI.MenuBiblio;
+
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
@@ -8,7 +12,8 @@ import java.io.ObjectOutputStream;
 
 public class Main {
 	
-	public Main() {
+	public Main(boolean isGUI) {
+		boolean GUI = isGUI;
 
 		Biblio bibliotheque = new Biblio();
 		
@@ -30,12 +35,17 @@ public class Main {
 			EntreesSorties.afficherMessage(" $$$ Restauration du fichier " + nomFich + " realisee");
 		} catch (Exception e) {
 			EntreesSorties.afficherMessage(" *** Start : Pbs de Restauration / fichier " + nomFich);
+			EntreesSorties.afficherMessage(e.getMessage());
 		}
 		//----------------------------------------------------------------------------------------------
-		
-		MenuBiblio menu = new MenuBiblio(bibliotheque);
-		menu.menuPrincipal();
-		
+
+		if (GUI) {
+			Fenetre maFenetre = new Fenetre(bibliotheque);
+		}else{
+			MenuBiblio menu = new MenuBiblio(bibliotheque);
+			menu.menuPrincipal();
+		}
+
 		/*---------------------------------------------------------------------------------------------
 		 * Sériaisation dans le fichier du nom de "save.ser".
 		 * L'utilisateur est informé de la réussite ou non de la sauvegarde des données.
@@ -52,10 +62,12 @@ public class Main {
 			f.close();
 		} catch (Exception e) {
 			EntreesSorties.afficherMessage(" *** Start :Pbs de Sauvegarde dans le fichier " + nomFich);
+			EntreesSorties.afficherMessage(e.getMessage());
 		}
 	}
 	
 	public static void main(String args[]){
-	new Main();
+		//new Main(args[0].equalsIgnoreCase("true"));
+		new Main(false);
 	}
 }

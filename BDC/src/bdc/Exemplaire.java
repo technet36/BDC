@@ -1,5 +1,7 @@
 package bdc;
 
+import UI.EntreesSorties;
+
 import java.io.Serializable;
 import java.util.GregorianCalendar;
 
